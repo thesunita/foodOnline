@@ -5,6 +5,7 @@ from accounts.models import User, UserProfile
 
 @receiver(post_save, sender=User)
 def post_save_create_profile_reciever(sender, instance, created,**kwargs):
+    print('post_save_create_profile_reciever')
     if created:
         UserProfile.objects.create(user=instance)
     else:
@@ -12,6 +13,6 @@ def post_save_create_profile_reciever(sender, instance, created,**kwargs):
             profile = UserProfile.objects.get(user=instance)
             profile.save()
         except:
-            UserProfile.objects.create(usre=instance)
+            UserProfile.objects.create(user=instance)
             print('User Profile was not exit, but I created one')
         print('User is updated')
